@@ -1,0 +1,4 @@
+candle|3.0
+keyboard|30.0
+mouse|20.0
+table|140.0

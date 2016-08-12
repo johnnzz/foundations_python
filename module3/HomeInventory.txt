@@ -1,0 +1,5 @@
+pencil|0.5
+table|300.0
+car|500.0
+mouse|20.0
+rug|150.0

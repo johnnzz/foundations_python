@@ -1,0 +1,7 @@
+1|Bob Smith|BSmith@Hotmail.com
+2|Sue Jones|SueJ@Yahoo.com
+3|Joe James|JoeJames@Gmail.com
+4|Jane Smith|js@foo.bar
+5|Joe Bob|jb@acme.com
+6|Bobby Sue|susu@foo.org
+7|Sue Sue|suziz@bar.com

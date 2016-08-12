@@ -1,0 +1,2 @@
+1|Clean House|low
+2|Pay Bills|high

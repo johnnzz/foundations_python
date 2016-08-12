@@ -1,0 +1,11 @@
+1|Clean House|low
+2|Pay Bills|high
+3|Buy Groceries|medium
+5|Assignment 5|high
+7|Walk Dog|high
+8|Wash Car|low
+9|Refinish Table|low
+11|Clean Gutters|low
+12|Paint Garage|low
+14|Buy Dog Toys|high
+15|Mow Grass|low

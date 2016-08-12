@@ -1,0 +1,2 @@
+1|canned peas|1.50
+2|frozen corn|4.10

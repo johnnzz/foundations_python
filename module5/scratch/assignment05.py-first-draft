@@ -1,0 +1,164 @@
+'''
+Assignment 5
+Foundations of Programming: Python
+23 July 2016
+
+Instructor:  Randal Root
+Student:     John Navitsky
+
+Description:
+
+Script manages a "ToDo list." The ToDo file will contain two columns of data
+(Task, Priority) which will store in a Python Dictionary. Each Dictionary will
+represent one row of data. Which will then be added to a Python List to
+create a table of data.
+
+Create a text file called todo.txt using the following data:
+
+Clean House,low
+Pay Bills,high
+
+When the program starts, load the each rows of data you have in the todo.txt
+text file into a python Dictionary.
+
+After you get a row of data add it to a Python List object (now the data will
+be managed as a table or two dimensional array).
+
+Display the contents of the List to the user.
+
+Allow the user to Add or Remove tasks from the list, plus Save the tasks in
+the List tasks-priorities using numbered choices.
+
+Save the data from the table into the todo.txt file when the program exits.
+'''
+
+
+# let the user know what we are doing
+print()
+print("TASK MANAGER 2000")
+print("Add/List/Remove tasks")
+
+# ensure the customer file exists to avoid
+# a file not found error during read
+todo_file = open("todo.txt", "a")
+todo_file.close()
+
+# initialize inventory as a list
+task_list = []
+
+# read any existing customer data
+todo_file = open("todo.txt", "r")
+for line in todo_file:
+    # read in line of task data
+    task_id, task_name, task_priority = line.split("|")
+    # create a list with the task data stripping the
+    # new line from the file
+    record = { "id": task_id, "task": task_name, "priority": task_priority.strip("\n")}
+    # add record to the inventory
+    task_list.append(record)
+todo_file.close()
+
+# figure out what the last id is
+last_id = 1
+for record in task_list:
+    if int(record["id"]) > last_id:
+        last_id = int(record["id"])
+
+# main entry loop
+# ask for entries until user quits
+while(True):
+
+    # make sure we start each run without pollution
+    task_id = None
+    task_name = ""
+    task_priority = ""
+
+    print()
+    task_name = input("Enter the task to add, 'exit', or 'list': ")
+    # look for an exit request
+
+    # break out of the entry loop when asked
+    if task_name.lower() == "exit":
+        break
+
+    # show currently loaded items if asked
+    if task_name.lower() == "list":
+        # don't print header if task list is empty
+        if task_list:
+            # give us a header
+            print()
+            print("id".ljust(4), "task".ljust(20), "priority".ljust(8))
+            print("-"*4, "-"*20, "-"*8)
+            # print each entry in the task list
+            for record in task_list:
+                # print the record
+                print(str(record["id"]).ljust(4), record["task"].ljust(20), record["priority"].ljust(8))
+        else:
+            print()
+            print("  No entries yet")
+        # return to input loop
+        continue
+
+    # make sure they entered something before adding the entry
+    if task_name:
+
+        # try until they enter a value
+        while(not task_priority):
+            task_priority = input("Enter the priority of " + task_name + ": ")
+
+        # entry, save it
+
+        # id will be the last_id plus 1
+        task_id = last_id + 1
+        # increment the last_id
+        last_id += 1
+
+        # make a todo record
+        record = { "id": task_id, "task": task_name, "priority": task_priority}
+
+        # add record to the task list
+        task_list.append(record)
+
+# don't try to write data if the task list is empty
+if task_list:
+
+    # ask if they'd like to save
+    print()
+    save_data = input("Would you like to save these records [y/n]? ")
+
+    # save the data
+    if save_data.lower() == "y" or save_data.lower() == "yes":
+
+        # open todo file in write mode in the current directory
+        # this overwrites the current file, but we have the previous
+        # entries in memory
+        todo_file = open("todo.txt", "w")
+
+        print()
+
+        # write out the records
+        for record in task_list:
+
+            # unpack the values for processing
+            task_id = record["id"]
+            task_name = record["task"]
+            task_priority = record["priority"]
+
+            # give the user feedback
+            print("...writing: " + task_name)
+
+            # write the entry to the file
+            todo_file.write(str(task_id) + "|" + task_name + "|" + str(task_priority) + "\n")
+
+        # close the file before exiting
+        todo_file.close()
+
+        print()
+        print("Task list updated!")
+
+    else:
+        # acknowledge the user decision
+        print("OK, next time!")
+else:
+    # give the user feedback
+    print("Goodbye!")
