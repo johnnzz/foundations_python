@@ -45,12 +45,15 @@ class person():
 
 class customer(person):
 
+    __last_id = 0
+
     # constructor
 
     # need to allow the input of a new parameter, id
-    def __init__(self, id = "", firstname = "", lastname = ""):
+    def __init__(self, firstname = "", lastname = ""):
         super().__init__(firstname,lastname)
-        self.id = id
+        customer.__last_id = customer.__last_id + 1
+        self.id = customer.__last_id
 
     # properties
 
@@ -72,10 +75,16 @@ class customer(person):
     def __str__(self):
         return self.to_string()
 
+    @staticmethod
+    def last_cust_id():
+        return customer.__last_id
 
-myguy = customer(20, "fred", "jones")
-#myguy.id = 30
+
+customer1 = customer("fred", "jones")
+print(customer1)
+
+customer2 = customer("sue", "barnes")
+print(customer2)
 
 
-print(myguy)
 
